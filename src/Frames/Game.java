@@ -18,6 +18,8 @@ public class Game extends JFrame {
     private Integer firstClickedCardValue = null ;
     private Integer secondClickedCardValue = null ;
     private boolean cardClickable = true;
+    private int nbOfAttempts = 7;
+    private JLabel attemptLabel;
 
     public Game() {
         setTitle("Jeu de Memory");
@@ -49,6 +51,10 @@ public class Game extends JFrame {
             cardPanel.add(buttons[i]);
         }
 
+        attemptLabel = new JLabel(nbOfAttempts + "<3"); //mettre icone de coeur)
+        attemptLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        add(attemptLabel, BorderLayout.SOUTH);
+
         // Bouton pour retourner au menu principal
         JButton backButton = new JButton("Retour au Menu");
         backButton.addActionListener(new ActionListener() {
@@ -67,11 +73,14 @@ public class Game extends JFrame {
 
       buttons[i].setText(String.valueOf(cardValues.get(i)));
 
+
       if(firstClickedCardValue == null) {
           firstClickedCardValue = i;
       } else if (secondClickedCardValue == null) {
           secondClickedCardValue = i;
 
+          nbOfAttempts--;
+          attemptLabel.setText(nbOfAttempts + "<3"); //mettre icone de coeur
           cardClickable = false;
 
           if(cardValues.get(firstClickedCardValue).equals(cardValues.get(secondClickedCardValue))) {
@@ -84,10 +93,15 @@ public class Game extends JFrame {
                   // sauvegarder scores
                   dispose();
               }
-              // ajouter nb essai max (vies) et si plus de vies alors  FAIL
               // ajout temps / chronomètre ?
 
           } else {
+
+              if(nbOfAttempts == 0) {
+                  new GameFail().setVisible(true);
+                  dispose();
+              }
+
               Timer timer = new Timer(1000, new ActionListener() {
                   public void actionPerformed(ActionEvent e) {
                       buttons[firstClickedCardValue].setText("");

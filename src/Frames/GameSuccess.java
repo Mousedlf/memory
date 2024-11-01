@@ -17,7 +17,7 @@ public class GameSuccess extends JFrame {
 
         JPanel panel = new JPanel();
         JLabel successMessage = new JLabel("Youhou fini !");
-        successMessage.setFont(StyleConstants.P);
+        successMessage.setFont(StyleConstants.GAME_RESULT);
         panel.add(successMessage, BorderLayout.CENTER);
 
 
