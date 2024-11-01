@@ -12,6 +12,7 @@ public class StyleConstants {
     public static final Color PRIMARY_COLOR = Color.BLUE;
 
     // Polices
+    public static final Font P = new Font("Arial", Font.PLAIN, 18);
 
     // ?
 
